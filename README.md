@@ -151,20 +151,30 @@ Your API should ever return only the following HTTP status codes.
 
 ## 3. First error validation response model
 
-There are two common ways on how validations are handled by APIs.
+There are two common ways on how validations are normally handled by APIs.
 - **first error only**: easier to implement
 - **multiple errors**: more descriptive
 
 This convention promotes the **first error only** approach not only because it's easier to implement but because it's also easier to reason about. 
 
-Returning **multiple errors** is very often interpreted as **all errors** but returning all errors cannot be guaranteed for all business cases. Validating something may depend on successful validation of something else. Validation may or may not trigger something that changes the validation behvaiour in the next validation attempt. Business logic should be always treated like **anything can happen**.
+Returning **multiple errors** is very often interpreted as **all errors** but returning all errors cannot be guaranteed for all business cases. Validating something may depend on successful validation of something else. Validation may or may not trigger something that changes the validation behvaiour in the next validation attempt. Business logic should always be treated like **"anything can happen"**.
 
 Another argument is that modern applications implement validations on the frontend side as well. The model returned by the backend should signal either that a validation on frontend is not yet implemented or the validation on frontend is not possible at all.
 
 ### 3.1. Failed validation model properties
 
+```json
+{
+   "errorCode": "VALIDATION_ERROR",
+   "errorMessage": null,
+   "references": null,
+   "attemptedValues": null
+}
+```
+
 #### 3.1.1 Error code
-- Error code is a SCREAMING_SNAKE_CASE text.
+Error code is a SCREAMING_SNAKE_CASE text.
+
 - It must not start with number and can contain only upper case alphanumerical english letters and underscore.
 - The error code must have at least 5 characters and is recommended to have at most 100 characters.
 - It should NOT contain any data.
@@ -172,18 +182,21 @@ Another argument is that modern applications implement validations on the fronte
 - The default value is VALIDATION_ERROR. Error code must be ALWAYS present in the failed validation response.
 
 #### 3.1.2 Error message
-- Error message is a human readable descriptive text which is by default in the default language of your project.
+Error message is a human readable descriptive text which is by default in the default language of your project.
+
 - It can contain data about the request.
 - It is not compulsory and is `null` by default.
 - The message should follow any logic you have in your system for localization.
 
-#### 3.1.3 Argument name
+#### 3.1.3 References
+Array of the input model properties that are responsible for this validation to fail. If used together with `attemptedValues` then the references should line up with the values.
 
-## Data table standard - simple variant
+- It is not compulsory and is `null` by default.
 
-## Data table standard - complex variant
+#### 3.1.3 Attempted values
+Array of the input model values that are responsible for this validation to fail. If used together with `references` then the attempted values should line up with the references.
 
-
+- It is not compulsory and is `null` by default.
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
