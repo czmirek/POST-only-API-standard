@@ -46,14 +46,14 @@ This is the example on the site [What is REST?](https://restfulapi.net/)
   "author": {
     "id": 456,
     "name": "John Doe",
-    "profile_url": "https://example.com/authors/456" <----------- REST link
+    "profile_url": "https://example.com/authors/456" //---------- REST link
   },
   "comments": {
     "count": 5,
-    "comments_url": "https://example.com/posts/123/comments" <--- REST link
+    "comments_url": "https://example.com/posts/123/comments" //-- REST link
   },
   "self": {
-    "link": "https://example.com/posts/123" <-------------------- REST link
+    "link": "https://example.com/posts/123" //------------------- REST link
   }
 }
 ```
