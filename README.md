@@ -237,6 +237,8 @@ Array of the input model values that are responsible for this validation to fail
 
 ## 4 Modify but communicate
 
-Take this convention and change it however you like for your needs! Do take care of communicating your updated rules properly to all of your backend and frontend developers and to all your API consumers.
+Take this convention and change it however you like to fit your needs! 
+
+Do take care of communicating your updated rules properly to all of your backend and frontend developers, to your team and to all your API consumers.
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
