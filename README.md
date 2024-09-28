@@ -33,7 +33,9 @@ This requirement is normally ignored because:
 
 #### Hypermedia links
 
-Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning. This is the example on the site [What is REST?](https://restfulapi.net/)
+Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning.
+
+This is the example on the site [What is REST?](https://restfulapi.net/)
 
 json
 ```
@@ -45,17 +47,19 @@ json
   "author": {
     "id": 456,
     "name": "John Doe",
-    **"profile_url": "https://example.com/authors/456"**
+    "profile_url": "https://example.com/authors/456" <----------- REST link
   },
   "comments": {
     "count": 5,
-    "comments_url": "https://example.com/posts/123/comments"
+    "comments_url": "https://example.com/posts/123/comments" <--- REST link
   },
   "self": {
-    "link": "https://example.com/posts/123"
+    "link": "https://example.com/posts/123" <-------------------- REST link
   }
 }
 ```
+
+
 
 
 
