@@ -84,6 +84,7 @@ Short version so you don't have to read the Wikipedia article
 This is complete nonsense built on ideas of another nonsense. I've seen it personally being promoted in corporations by IT architects with no knowledge in programming.
 
 🤨 **HTTP protocol is just a protocol**
+
 Complicated reactive architectures have multiple endpoints for doing a single thing. For example, the function of the `/createBooking` endpoint can be invoked by a message comming from a message bus. The function itself can be part of other bigger functions that may or may not have HTTP endpoints at all. Imposing a REST convention on yourself forces you to think about how it fits in a wider context of the whole system but giving you nothing useful in return.
 
 ## Identifying the needs for common API developers
@@ -119,32 +120,49 @@ When you build an API, you **SHOULDN'T** care if it's going to be consumed by a 
 1. The body of the HTTP request may be empty or contain a valid JSON
 1. The body of the HTTP response may be empty or contain a valid JSON
 
-### 1.6. 2xx status codes
-1. Ignore HTTP RFC specifications on HTTP status codes in the 2xx group except 200.
-1. All API responses should always return HTTP status code 200 for all cases.
+### 1.6. HTTP status codes
 
-### 1.7. 3xx status codes
-1. Ignore HTTP RFC specifications on HTTP status codes in the 3xx group
-1. Do not ever send HTTP status codes in the 3xx group in any case.
+Your API should ever return only the following HTTP status codes.
 
-### 1.8. 4xx status codes
-1. Ignore HTTP RFC specifications on HTTP status codes in the 4xx group
-1. Do not ever send HTTP status codes in the 4xx group in any case.
+#### 1.6.1 200
 
-### 1.8. 5xx status codes
+1. All API responses should by default always return HTTP status code 200 for all cases.
+1. The meaning is same as in HTTP RFC - the call was successful.
 
-#### 1.8.1 HTTP 500
+#### 1.6.2 400
 
-1. All errors in your application that do not crash your API on HTTP request should return HTTP 500. This means that HTTP 500 response from your API is always a bug.
-1. The body of the HTTP response should by default contain an empty body. By default you should not send details about your exceptions/errors to the client.
+1. If the HTTP request data are invalid **for any reason** e.g. related to the JSON model itself or related to the business logic provided by the API, return HTTP 400. The content of the body is discussed in detail in chapter 2.
+1. Choice of using HTTP 400 is not arbitrary. Clients detecting HTTP 400 can drop any expectations about the response and instead read the validation errors from the standardized model described in chapter 2.
+
+#### 1.6.3 500
+
+1. All errors in your application that do not crash your API on HTTP request should return HTTP 500. This means that HTTP 500 response from your API is always a bug on your API.
+1. The body of the HTTP response should by default contain an empty body. You should not normally send details about your exceptions/errors to the client.
 1. For debugging purposes the HTTP response CAN contain a body containing a crash log, exception stack trace, etc., in a plain text format.
 1. If the UI clients detect HTTP 500 from the API they should always display a clear message that the server errored upon request. If the response contains a plain text error then it must be presented in the UI to the user.
 
-#### 1.8.2 Other 5xx status codes
-1. Ignore HTTP RFC specifications on other HTTP status codes in the 5xx group
-1. Do not ever send other HTTP status codes in the 5xx group in any case.
+#### 1.6.4 All other status codes
+1. Ignore HTTP RFC specifications for any other status codes
+1. Do not ever send HTTP status codes in the 3xx group in any case.
 
-### 1.9 Custom status codes
+#### 1.6.5 Custom status codes
 1. Do not ever send any custom status codes outside the HTTP RFC range in any case.
+
+## 2. API responses
+In point ... is specified that the HTTP body response can be either empty or contain a valid JSON. This chapter discusses two strategies on how the API can be returned.
+
+
+### 2.1. Direct 
+
+### 2.2. The parent structure method
+
+
+
+## 3. Data table standard - simple variant
+
+## 4. Data table standard - complex variant
+
+
+
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
