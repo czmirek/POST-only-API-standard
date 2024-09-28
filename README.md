@@ -102,21 +102,40 @@ IT projects are driven by business requirements. Business requirements are ideas
 When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
 
 ### 1.2. Ignore HTTP request headers
-Request headers are an implementation detail of the HTTP protocol. You should ignore any incoming HTTP request headers
-
-#### 1.2.1. Except for OAuth/OIDC
-The exception to this rule is the authorization headers used by **OAuth/OIDC**. You cannot really build a modern API authenticated by OAuth without utilizing headers.
+1. Request headers are an implementation detail of the HTTP protocol. You should ignore any incoming HTTP request headers.
+1. However if your application needs to follow some other standard that requires you to handle headers (for example OAuth or OIDC) then you handle them accordingly. 
+1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data from clients belong to the HTTP POST request body.
 
 ### 1.3. Do not send any HTTP response headers
-Response headers are an implementation detail of the HTTP protocol. You should never send any HTTP headers from your API.
+1. Response headers are an implementation detail of the HTTP protocol. You should never send any HTTP headers from your API.
+1. However if your application needs to follow some other standard that requires you to return headers then you return them accordingly.
+1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data sent back to clients belong to the HTTP POST response body.
 
-### 1.4. Accept only the HTTP POST verb
+### 1.4. Accept the HTTP POST verb only
 1. Your endpoints should accept the HTTP request only with the HTTP POST verb.
 1. If the client sends a different HTTP verb then the HTTP response with status code 405 and **empty body** should be returned.
 
-### 1.4. All communicated data (except files) belong to the POST body in the form of JSON
-- The body of the HTTP request may be empty or contain a valid JSON
-- 
+### 1.5. All communicated data (except files) belong to the POST body in the form of JSON
+1. The body of the HTTP request may be empty or contain a valid JSON
+1. The body of the HTTP response may be empty or contain a valid JSON
+
+### 1.6. 2xx status codes
+1. Ignore HTTP RFC specifications on HTTP status codes in the 2xx group except 200.
+1. All API responses should always return HTTP status code 200 for all cases.
+
+### 1.7. 3xx status codes
+1. Ignore HTTP RFC specifications on HTTP status codes in the 3xx group
+1. Do not ever send HTTP status codes in the 3xx group in any case.
+
+### 1.8. 4xx status codes
+1. Ignore HTTP RFC specifications on HTTP status codes in the 4xx group
+1. Do not ever send HTTP status codes in the 4xx group in any case.
+
+### 1.8. 5xx status codes
+1. HTTP 500
+  1.1. All errors in your application that do not crash your API on HTTP request should return HTTP 500.
+  1.1. and either an empty body or details about the error in a plain text. Clients should always interpret HTTP 500 as an unexpected server error
+1. 
 
 
 
