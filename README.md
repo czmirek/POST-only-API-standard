@@ -131,8 +131,8 @@ Your API should ever return only the following HTTP status codes.
 
 #### 1.6.2 400
 
-1. If the HTTP request data are invalid **for any reason** e.g. related to the JSON model itself or related to the business logic provided by the API, return HTTP 400. The content of the body is discussed in detail in chapter 2.
-1. Choice of using HTTP 400 is not arbitrary. Clients detecting HTTP 400 can drop any expectations about the response and instead read the validation errors from the standardized model described in chapter 2.
+1. If the HTTP request data are invalid **for any reason** e.g. related to the JSON model itself or related to the business logic provided by the API, return HTTP 400. The content of the body is discussed in detail in chapter 3.
+1. Choice of using HTTP 400 is not arbitrary. Clients detecting HTTP 400 can drop any expectations about the response and instead read the validation errors from the standardized model described in chapter 3.
 
 #### 1.6.3 500
 
@@ -145,19 +145,43 @@ Your API should ever return only the following HTTP status codes.
 1. Ignore HTTP RFC specifications for any other status codes
 1. Do not ever utilize any custom status codes outside the HTTP RFC range in any case.
 
-## 2. API responses
-In point ... is specified that the HTTP body response can be either empty or contain a valid JSON. This chapter discusses two strategies on how the API can be returned.
+## 2. API input models and output models
+1. You are free to model your input and output models **however you want**.
+1. However - do not build a parent model for handling validations which is commonly used. These models usually have properties like `response` and `error`. Clients using this convention should always first detect the returned HTTP status code. If the returned status code is 400 then the clients should always expect the same validation model in the response. This model is described in the chapter 3.
 
+## 3. First error validation response model
 
-### 2.1. Direct 
+There are two common ways on how validations are handled by APIs.
+- **first error only**: easier to implement
+- **multiple errors**: more descriptive
 
-### 2.2. The parent structure method
+This convention promotes the **first error only** approach not only because it's easier to implement but because it's also easier to reason about. 
 
+Returning **multiple errors** is very often interpreted as **all errors** but returning all errors cannot be guaranteed for all business cases. Validating something may depend on successful validation of something else. Validation may or may not trigger something that changes the validation behvaiour in the next validation attempt. Business logic should be always treated like **anything can happen**.
 
+Another argument is that modern applications implement validations on the frontend side as well. The model returned by the backend should signal either that a validation on frontend is not yet implemented or the validation on frontend is not possible at all.
 
-## 3. Data table standard - simple variant
+### 3.1. Failed validation model properties
 
-## 4. Data table standard - complex variant
+#### 3.1.1 Error code
+- Error code is a SCREAMING_SNAKE_CASE text.
+- It must not start with number and can contain only upper case alphanumerical english letters and underscore.
+- The error code must have at least 5 characters and is recommended to have at most 100 characters.
+- It should NOT contain any data.
+- Error codes should be hardcoded strings (or constants, enums, etc.) in the codebase of your API.
+- The default value is VALIDATION_ERROR. Error code must be ALWAYS present in the failed validation response.
+
+#### 3.1.2 Error message
+- Error message is a human readable descriptive text which is by default in the default language of your project.
+- It can contain data about the request.
+- It is not compulsory and is `null` by default.
+- The message should follow any logic you have in your system for localization.
+
+#### 3.1.3 Argument name
+
+## Data table standard - simple variant
+
+## Data table standard - complex variant
 
 
 
