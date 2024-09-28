@@ -1,8 +1,6 @@
 # README
 
-Hello all.
-
-This is a for fun project aimed at creating a sensible POST only API standard.
+This is a for fun project aimed at creating a sensible API standard.
 
 ## Critique of the REST convention
 
@@ -85,11 +83,33 @@ Short version so you don't have to read the Wikipedia article
 
 This is complete nonsense built on ideas of another nonsense. I've seen it personally being promoted in corporations by IT architects with no knowledge in programming.
 
+🤨 **HTTP protocol is just a protocol**
+Complicated reactive architectures have multiple endpoints for doing a single thing. For example, the function of the `/createBooking` endpoint can be invoked by a message comming from a message bus. The function itself can be part of other bigger functions that may or may not have HTTP endpoints at all. Imposing a REST convention on yourself forces you to think about how it fits in a wider context of the whole system but giving you nothing useful in return.
+
 ## Identifying the needs for common API developers
 
-## Philosophy of the POST only API standard
+❗**Backend - frontend agreements**
+Full stack developers are getting less and less common. IT teams are split between backend and frontend developers who need to understand rules for how to handle common topics such as validations and table handling.
+
+❗**Business requirements over conventions**
+IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
 ## The standard itself! (finally)
+
+1. General philosophy
+1.1 **Client-server over browser-server.**
+   HTTP is a historically estabilished stateless protocol for communication between browsers and servers but in time has evolved into a generalized client-server usage. When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
+
+1.1 **Ignore HTTP headers**
+Request and response headers are an implementation detail of the HTTP protocol. 
+- You shouldn't use the HTTP headers at all.
+- You should ignore any incoming HTTP request headers
+- You shouldn't produce any HTTP response headers
+
+The exception to this rule is the authorization headers used by **OAuth/OIDC**. You cannot really build a modern API authenticated by OAuth without utilizing headers.
+
+1.1 Ignore HTTP verbs. Use POST for all endpoints
+1.1 All communicated data belong to the POST body in the form of JSON
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
