@@ -146,7 +146,7 @@ Your API should ever return only the following HTTP status codes.
 1. Do not ever utilize any custom status codes outside the HTTP RFC range in any case.
 
 ## 2. API input models and output models
-1. You are free to model your input and output models **however you want**.
+1. You are free to model your input and output models however you want.
 1. However - do not build a parent model for handling validations which is commonly used. These models usually have properties like `response` and `error`. Clients using this convention should always first detect the returned HTTP status code. If the returned status code is 400 then the clients should always expect the same validation model in the response. This model is described in the chapter 3.
 
 ## 3. First error validation response model
