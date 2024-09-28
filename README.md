@@ -133,9 +133,9 @@ When you build an API, you **SHOULDN'T** care if it's going to be consumed by a 
 
 ### 1.8. 5xx status codes
 1. HTTP 500
-  1.1. All errors in your application that do not crash your API on HTTP request should return HTTP 500.
-  1.1. and either an empty body or details about the error in a plain text. Clients should always interpret HTTP 500 as an unexpected server error
-1. 
+1.1. All errors in your application that do not crash your API on HTTP request should return HTTP 500. This means that HTTP 500 response from your API is always a bug.
+1.2. The body of the HTTP response should by default contain an empty body.
+1.3. For debugging purposes the HTTP response CAN contain a body containing a crash log, exception stack trace, etc., in a plain text format.
 
 
 
