@@ -91,9 +91,11 @@ Complicated reactive architectures have multiple endpoints for doing a single th
 ## Identifying the needs for common API developers
 
 ❗**Backend - frontend agreements**
-Full stack developers are getting less and less common. IT teams are split between backend and frontend developers who need to understand rules for how to handle common topics such as validations and table handling.
+
+Full stack developers are getting less and less common. IT teams are split between backend and frontend developers who need to understand rules for how to handle validations and HTTP status codes.
 
 ❗**Business requirements over conventions**
+
 IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
 # The POST only API standard
