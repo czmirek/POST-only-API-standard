@@ -207,6 +207,12 @@ Array of the input model values that are responsible for this validation to fail
 - It can be `null`
 - The array can contain any valid JSON type including objects
 
+#### 3.1.4 Client validatable
+This is a boolean that indicates whether this particular validation could have been done by the client or not. Value `true` indicates that the returned validation error can be prevented on the client side.
+
+- It is not compulsory
+- It can be `null`
+
 #### 3.1.4 JSON schema
 ```json
 {
@@ -224,6 +230,9 @@ Array of the input model values that are responsible for this validation to fail
     },
     "attemptedValues": {
       "type": ["array", "null"]
+    },
+    "clientValidatable": {
+      "type": ["boolean", "null"]
     }
   },
   "required": [
@@ -238,7 +247,8 @@ Array of the input model values that are responsible for this validation to fail
   "errorCode": "INVALID_REFERENCE",
   "errorMessage": "Please include valid User ID",
   "references": ["UserId"],
-  "attemptedValues": [555]
+  "attemptedValues": [555],
+  "clientValidatable": true
 }
 ```
 
