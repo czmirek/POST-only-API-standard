@@ -94,21 +94,23 @@ Full stack developers are getting less and less common. IT teams are split betwe
 ❗**Business requirements over conventions**
 IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
-## The standard itself! (finally)
+# The standard itself! (finally)
 
-1. General philosophy
-1.1. Client-server over browser-server.
-   HTTP is a historically estabilished stateless protocol for communication between browsers and servers but in time has evolved into a generalized client-server usage. When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
+## 1. General philosophy
 
-1.1 **Ignore HTTP headers**
+### 1.1. Client-server over browser-server
+HTTP is a historically estabilished stateless protocol for communication between browsers and servers but in time has evolved into a generalized client-server usage. When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
+
+### 1.2. Ignore HTTP headers
 Request and response headers are an implementation detail of the HTTP protocol. 
 - You shouldn't use the HTTP headers at all.
 - You should ignore any incoming HTTP request headers
 - You shouldn't produce any HTTP response headers
 
+#### 1.2.1 Except for OAuth/OIDC
 The exception to this rule is the authorization headers used by **OAuth/OIDC**. You cannot really build a modern API authenticated by OAuth without utilizing headers.
 
-1.1 Ignore HTTP verbs. Use POST for all endpoints
+### 1.3 Ignore HTTP verbs. Use POST for all endpoints
 1.1 All communicated data belong to the POST body in the form of JSON
 
 
