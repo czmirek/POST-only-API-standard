@@ -24,24 +24,38 @@ Namely:
 
 Using HTTP header `Cache-Control` you can alter behavior on how browsers cache your `GET` responses.
 
-> The goal of caching is never having to generate the same response twice. [^3]
+*"The goal of caching is never having to generate the same response twice."* [^3]
 
-This is normally ignored because:
-- Caching should be considered only when we optimize things. We should optimize things only when we find that our things don't run as fast as we want them to.
-- Caching is a hard problem. How to cache? When to cache? What to cache? Utilizing `Cache-Control` is one of many solutions. You can cache in the browser, on server
+This requirement is normally ignored because:
+- Caching should be considered only when we optimize things. And we should optimize things only when we find that our things don't run as fast as we want them to.
+- Caching is a hard problem. How to cache? When to cache? What to cache? For how long? Do we need to reset the cache reactively? Or on timed manner? How is the cache stored?
+- Utilizing `Cache-Control` can be just a single part of multilayered cache solution that utilizes the browser cache and/or the server cache.
 
+#### Hypermedia links
 
+Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning. This is the example on the site [What is REST?](https://restfulapi.net/)
 
-
-
-- HTTP is already stateless so the *statelessness of REST* is not really a thing.
-- Context dependent HTTP request is impossible to qualify.  
-
-
-- It's a completely arbitrary convention over how HTTP should be used
-- The REST API convention does not identify solutions to common pitfals when building APIs such as how to handle validations, server errors, 
-- 
-
+json
+```
+{
+  "id": 123,
+  "title": "What is REST",
+  "content": "REST is an architectural style for building web services...",
+  "published_at": "2023-11-04T14:30:00Z",
+  "author": {
+    "id": 456,
+    "name": "John Doe",
+    **"profile_url": "https://example.com/authors/456"**
+  },
+  "comments": {
+    "count": 5,
+    "comments_url": "https://example.com/posts/123/comments"
+  },
+  "self": {
+    "link": "https://example.com/posts/123"
+  }
+}
+```
 
 
 
