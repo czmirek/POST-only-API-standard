@@ -94,24 +94,31 @@ Full stack developers are getting less and less common. IT teams are split betwe
 ❗**Business requirements over conventions**
 IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
-# The standard itself! (finally)
+# The POST only API standard
 
-## 1. General philosophy
+## 1. API behaviour
 
-### 1.1. Client-server over browser-server
-HTTP is a historically estabilished stateless protocol for communication between browsers and servers but in time has evolved into a generalized client-server usage. When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
+### 1.1. Client agnostic API
+When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
 
-### 1.2. Ignore HTTP headers
-Request and response headers are an implementation detail of the HTTP protocol. 
-- You shouldn't use the HTTP headers at all.
-- You should ignore any incoming HTTP request headers
-- You shouldn't produce any HTTP response headers
+### 1.2. Ignore HTTP request headers
+Request headers are an implementation detail of the HTTP protocol. You should ignore any incoming HTTP request headers
 
-#### 1.2.1 Except for OAuth/OIDC
+#### 1.2.1. Except for OAuth/OIDC
 The exception to this rule is the authorization headers used by **OAuth/OIDC**. You cannot really build a modern API authenticated by OAuth without utilizing headers.
 
-### 1.3 Ignore HTTP verbs. Use POST for all endpoints
-1.1 All communicated data belong to the POST body in the form of JSON
+### 1.3. Do not send any HTTP response headers
+Response headers are an implementation detail of the HTTP protocol. You should never send any HTTP headers from your API.
+
+### 1.4. Accept only the HTTP POST verb
+1. Your endpoints should accept the HTTP request only with the HTTP POST verb.
+1. If the client sends a different HTTP verb then the HTTP response with status code 405 and **empty body** should be returned.
+
+### 1.4. All communicated data (except files) belong to the POST body in the form of JSON
+- The body of the HTTP request may be empty or contain a valid JSON
+- 
+
+
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
