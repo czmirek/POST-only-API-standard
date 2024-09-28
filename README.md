@@ -84,6 +84,13 @@ Short version so you don't have to read the Wikipedia article
 
 This is complete nonsense built on ideas of another nonsense. I've seen it personally being promoted in corporations by IT architects with no knowledge in modern programming.
 
+The Truth™️:
+
+- Level 0: there is no problem in using a single endpoint for multiple functions. It's bit unusual but business logic very often confronts our ideas about how we should build things.
+- Level 1: nothing wrong with it
+- Level 2: common practice today by trying to follow REST to which I'm proposing the alternative in this article
+- Level 3: completely useless, see below
+
 🤨 **HTTP protocol is just a protocol**
 
 Complicated reactive architectures have multiple endpoints for doing a single thing. For example, the function of the `/createBooking` endpoint can be invoked by a message comming from a message bus. The function itself can be part of other bigger functions that may or may not have HTTP endpoints at all. Imposing a REST convention on yourself forces you to think about how it fits in a wider context of the whole system but giving you nothing useful in return.
