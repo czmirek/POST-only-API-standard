@@ -96,20 +96,20 @@ IT projects are driven by business requirements. Business requirements are ideas
 
 # The POST only API standard
 
-## 1. API behaviour
+## 1. HTTP usage
 
 ### 1.1. Client agnostic API
 When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
 
 ### 1.2. Ignore HTTP request headers
 1. Request headers are an implementation detail of the HTTP protocol. You should ignore any incoming HTTP request headers.
-1. However if your application needs to follow some other standard that requires you to handle headers (for example OAuth or OIDC) then you handle them accordingly. 
-1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data from clients belong to the HTTP POST request body.
+1. However, if your API needs to follow some other standard or needs headers for something **not related to the business logic of your API** to work properly then handle the headers accordingly.
+1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data from clients should belong to the HTTP POST request body.
 
 ### 1.3. Do not send any HTTP response headers
 1. Response headers are an implementation detail of the HTTP protocol. You should never send any HTTP headers from your API.
-1. However if your application needs to follow some other standard that requires you to return headers then you return them accordingly.
-1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data sent back to clients belong to the HTTP POST response body.
+1. However, if your API needs to follow some other standard or needs headers for something **not related to the business logic of your API** to work properly then return the headers accordingly.
+1. You must not invent your own proprietary protocols or ideas built on HTTP headers. All data sent back to clients should belong to the HTTP POST response body.
 
 ### 1.4. Accept the HTTP POST verb only
 1. Your endpoints should accept the HTTP request only with the HTTP POST verb.
@@ -132,12 +132,19 @@ When you build an API, you **SHOULDN'T** care if it's going to be consumed by a 
 1. Do not ever send HTTP status codes in the 4xx group in any case.
 
 ### 1.8. 5xx status codes
-1. HTTP 500
-1.1. All errors in your application that do not crash your API on HTTP request should return HTTP 500. This means that HTTP 500 response from your API is always a bug.
-1.2. The body of the HTTP response should by default contain an empty body.
-1.3. For debugging purposes the HTTP response CAN contain a body containing a crash log, exception stack trace, etc., in a plain text format.
 
+#### 1.8.1 HTTP 500
 
+1. All errors in your application that do not crash your API on HTTP request should return HTTP 500. This means that HTTP 500 response from your API is always a bug.
+1. The body of the HTTP response should by default contain an empty body. By default you should not send details about your exceptions/errors to the client.
+1. For debugging purposes the HTTP response CAN contain a body containing a crash log, exception stack trace, etc., in a plain text format.
+1. If the UI clients detect HTTP 500 from the API they should always display a clear message that the server errored upon request. If the response contains a plain text error then it must be presented in the UI to the user.
 
+#### 1.8.1 Other 5xx status codes
+1. Ignore HTTP RFC specifications on other HTTP status codes in the 5xx group
+1. Do not ever send other HTTP status codes in the 5xx group in any case.
+
+### 1.9 Custom status codes
+1. Do not ever send any custom status codes outside the HTTP RFC range in any case.
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
