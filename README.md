@@ -37,8 +37,7 @@ Hypermedia links are references to URLs of other resources that are in some rela
 
 This is the example on the site [What is REST?](https://restfulapi.net/)
 
-json
-```
+```json
 {
   "id": 123,
   "title": "What is REST",
