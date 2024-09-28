@@ -77,7 +77,7 @@ So according to someone named *Leanord Richardson* the REST convention is so imp
 
 Short version so you don't have to read the Wikipedia article
 
-- Level 0 (arrogantly named *POX swamp*) = one HTTP endpoint equals to multiple functions.
+- Level 0 = one HTTP endpoint equals to multiple functions.
   - For example, you send a POST over for `/bookings` and for creating booking you send `{ "operationId": "createBooking" ...}`, for updating the booking you send `{ "operationId": "updateBooking" ...}`
 - Level 1 = one HTTP endpoint equals to a single function (e.g. `/bookings/createBooking`, `/bookings/updateBooking` etc.)
 - Level 2 = you use HTTP verbs as defined by REST e.g. `GET` for reading resources, `POST` to update resources, `PUT` to create resources, etc.
