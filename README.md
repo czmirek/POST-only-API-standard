@@ -165,6 +165,37 @@ Another argument is that modern applications implement validations on the fronte
 
 ### 3.1. Failed validation model properties
 
+#### 3.1.1 Error code
+Error code is a SCREAMING_SNAKE_CASE text.
+
+- It must not start with number and can contain only upper case alphanumerical english letters and underscore.
+- The error code must have at least 5 characters and is recommended to have at most 100 characters.
+- It should NOT contain any data.
+- Error codes should be hardcoded strings (or constants, enums, etc.) in the codebase of your API.
+- The default value is VALIDATION_ERROR. Error code must be ALWAYS present in the failed validation response.
+
+#### 3.1.2 Error message
+Error message is a human readable descriptive text which is by default in the default language of your project.
+
+- It can contain data about the request.
+- It is not compulsory and is `null` by default.
+- The message should follow any logic you have in your system for localization.
+
+#### 3.1.3 References
+Array of the input model properties that are responsible for this validation to fail. If used together with `attemptedValues` then the references should line up with the values. This array can be used by UI clients to visually mark fields or areas where the server validation failed.
+
+- It is not compulsory and can be omitted from response.
+- It can be `null`
+- The array can contain only strings
+
+#### 3.1.3 Attempted values
+Array of the input model values that are responsible for this validation to fail. If used together with `references` then the attempted values should line up with the references. This array can be used by UI clients to highlight the erroneous value that was provided.
+
+- It is not compulsory
+- It can be `null`
+- The array can contain any valid JSON type including objects
+
+#### 3.1.4 JSON schema
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
@@ -189,33 +220,15 @@ Another argument is that modern applications implement validations on the fronte
 }
 ```
 
-#### 3.1.1 Error code
-Error code is a SCREAMING_SNAKE_CASE text.
-
-- It must not start with number and can contain only upper case alphanumerical english letters and underscore.
-- The error code must have at least 5 characters and is recommended to have at most 100 characters.
-- It should NOT contain any data.
-- Error codes should be hardcoded strings (or constants, enums, etc.) in the codebase of your API.
-- The default value is VALIDATION_ERROR. Error code must be ALWAYS present in the failed validation response.
-
-#### 3.1.2 Error message
-Error message is a human readable descriptive text which is by default in the default language of your project.
-
-- It can contain data about the request.
-- It is not compulsory and is `null` by default.
-- The message should follow any logic you have in your system for localization.
-
-#### 3.1.3 References
-Array of the input model properties that are responsible for this validation to fail. If used together with `attemptedValues` then the references should line up with the values. This array can be used by UI clients to visually mark fields or areas where the server validation failed.
-
-- It is not compulsory and can be omitted from response.
-- It can be `null`
-
-#### 3.1.3 Attempted values
-Array of the input model values that are responsible for this validation to fail. If used together with `references` then the attempted values should line up with the references. This array can be used by UI clients to display a human error message with the erroneous value that was provided.
-
-- It is not compulsory
-- It can be `null`
+#### 3.1.5 Example
+```json
+{
+  "errorCode": "INVALID_REFERENCE",
+  "errorMessage": "Please include valid User ID",
+  "references": ["UserId"],
+  "attemptedValues": [555]
+}
+```
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
