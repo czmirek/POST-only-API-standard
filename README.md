@@ -208,7 +208,7 @@ Array of the input model values that are responsible for this validation to fail
 - The array can contain any valid JSON type including objects
 
 #### 3.1.4 Client validatable
-This is a boolean that indicates whether this particular validation could have been done by the client or not. Value `true` indicates that the returned validation error can be prevented on the client side.
+This is a boolean that indicates whether this particular validation could have been done by the client or not. Value `true` indicates that the returned validation error can be evaluated on the client side.
 
 - It is not compulsory
 - It can be `null`
