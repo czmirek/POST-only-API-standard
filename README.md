@@ -14,6 +14,8 @@ However as far as conventions go there's not much else in what REST APIs offer f
 
 - validations
 - data filtering, paging, column sorting and column visibility
+- versioning
+- sane HTTP status code logic
 
 ### REST has constraints that API developers mostly ignore
 The standard also, as far as I can tell, imposes some other constraints on APIs that in practice most developers ignore.
@@ -35,7 +37,7 @@ This requirement is normally ignored because:
 
 Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning.
 
-This is the example on the site [What is REST?](https://restfulapi.net/)
+This is the example from the site [What is REST?](https://restfulapi.net/)
 
 ```json
 {
@@ -58,10 +60,10 @@ This is the example on the site [What is REST?](https://restfulapi.net/)
 }
 ```
 
-
-
-
-
+This is almost never implemented because it is **difficult** to implement.
+- Your API now depends on at least a single domain. This complicates architectures considerably. Can the domain change? Who's in charge of configuring this? What if the API is available from multiple hosts?
+- You need some kind of mapping between your API endpoints and their URL representations. This complicates API code. How do you handle API versioning?
+- ...what is this for anyway? Is there an actual use case for this? For example, why on earth would you ever need to utilize the `self:link`? Trying to build something like this smells like a bad project architecture than anything else.
 
 ## The standard
 
