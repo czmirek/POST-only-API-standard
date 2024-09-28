@@ -98,7 +98,7 @@ Full stack developers are getting less and less common. IT teams are split betwe
 
 IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
-# The POST only API standard
+# ✨ The POST only API standard ✨
 
 **Pretext about JSON casing**
 
