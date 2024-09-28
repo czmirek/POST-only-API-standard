@@ -235,7 +235,7 @@ Array of the input model values that are responsible for this validation to fail
 }
 ```
 
-## 4 Modify but communicate
+## 4. Modify but communicate
 
 Take this convention and change it however you like to fit your needs! 
 
