@@ -1,6 +1,6 @@
 # POST only API standard
 
-This is a for fun project aimed at creating a sensible API standard.
+This is a for fun project aimed at creating a sensible standard for creating HTTP APIs.
 
 ## Critique of the REST convention
 
