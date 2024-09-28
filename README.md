@@ -140,7 +140,7 @@ When you build an API, you **SHOULDN'T** care if it's going to be consumed by a 
 1. For debugging purposes the HTTP response CAN contain a body containing a crash log, exception stack trace, etc., in a plain text format.
 1. If the UI clients detect HTTP 500 from the API they should always display a clear message that the server errored upon request. If the response contains a plain text error then it must be presented in the UI to the user.
 
-#### 1.8.1 Other 5xx status codes
+#### 1.8.2 Other 5xx status codes
 1. Ignore HTTP RFC specifications on other HTTP status codes in the 5xx group
 1. Do not ever send other HTTP status codes in the 5xx group in any case.
 
