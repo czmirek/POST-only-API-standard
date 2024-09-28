@@ -91,7 +91,13 @@ The Truth™️:
 - Level 2: common practice today by trying to follow REST to which I'm proposing the alternative in this article
 - Level 3: completely useless, see below
 
-🤨 **HTTP protocol is just a protocol**
+🤨 **HTTP protocol is already being used as a client-server protocol**
+
+We use HTTP for browser to API, native app to API and even API to API. The historical details of HTTP status codes, verbs and headers are largely irelevant.
+
+So let's stop forcing yourself into thinking how to architect your application around REST and instead architect an API with consistent rules.
+
+🤨 **REST complicates architectures**
 
 Complicated reactive architectures have multiple endpoints for doing a single thing. For example, the function of the `/createBooking` endpoint can be invoked by a message comming from a message bus. The function itself can be part of other bigger functions that may or may not have HTTP endpoints at all. Imposing a REST convention on yourself forces you to think about how it fits in a wider context of the whole system but giving you nothing useful in return.
 
