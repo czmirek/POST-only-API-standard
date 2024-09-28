@@ -100,7 +100,9 @@ IT projects are driven by business requirements. Business requirements are ideas
 
 # The POST only API standard
 
-**Pretext about JSON casing**: This convention defines JSON models which have properties written in `camelCase`. The casing is not important and you can use the model in any casing that suits you.
+**Pretext about JSON casing**
+
+This convention defines JSON models which have properties written in `camelCase`. The casing is not important and you can use the model in any casing that suits you.
 
 ## 1. HTTP usage
 
