@@ -143,10 +143,7 @@ Your API should ever return only the following HTTP status codes.
 
 #### 1.6.4 All other status codes
 1. Ignore HTTP RFC specifications for any other status codes
-1. Do not ever send HTTP status codes in the 3xx group in any case.
-
-#### 1.6.5 Custom status codes
-1. Do not ever send any custom status codes outside the HTTP RFC range in any case.
+1. Do not ever utilize any custom status codes outside the HTTP RFC range in any case.
 
 ## 2. API responses
 In point ... is specified that the HTTP body response can be either empty or contain a valid JSON. This chapter discusses two strategies on how the API can be returned.
