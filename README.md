@@ -19,24 +19,22 @@ As far as conventions go there's not much else in what REST APIs offer for a com
 
 The standard also, as far as I can tell, imposes some other constraints on APIs that in practice most developers ignore.
 
-Namely:
-
-### Caching
+**Caching**
 
 Using HTTP header `Cache-Control` you can alter behavior on how browsers cache your `GET` responses.
 
-*"The goal of caching is never having to generate the same response twice."* [^3]
+*"The goal of caching is never having to generate the same response twice."* [^1]
 
 This requirement is normally ignored because:
 - Caching should be considered only when we optimize things. And we should optimize things only when we find that our things don't run as fast as we want them to.
 - Caching is a hard problem. How to cache? When to cache? What to cache? For how long? Do we need to reset the cache reactively? Or on timed manner? How is the cache stored?
 - Utilizing `Cache-Control` can be just a single part of multilayered cache solution that utilizes the browser cache and/or the server cache.
 
-### Hypermedia links
+**Hypermedia links**
 
 Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning.
 
-This is the example from the site [What is REST?](https://restfulapi.net/)
+This is an example from the site [What is REST?](https://restfulapi.net/)
 
 ```json
 {
@@ -59,13 +57,27 @@ This is the example from the site [What is REST?](https://restfulapi.net/)
 }
 ```
 
-This is almost never implemented because it is **difficult** to implement.
+This is almost never implemented because it is **difficult** to implement for no benefit.
 - Your API now depends on at least a single domain. This complicates architectures considerably. Can the domain change? Who's in charge of configuring this? What if the API is available from multiple hosts?
-- You need some kind of mapping between your API endpoints and their URL representations. This complicates API code. How do you handle API versioning?
-- ...what is this for anyway? Is there an actual use case for this? For example, why on earth would you ever need to utilize the `self:link`? Trying to build something like this smells like a bad project architecture than anything else.
+- You need some kind of mapping between your API endpoints and their URL representations. This complicates API code. Also how do you handle API versioning with this (e.g. when only the `comments` API is updated)?
+- ...what is this for anyway? For example, why on earth would you ever need to utilize the `self:link`? Trying to build on this smells like a bad project architecture than anything else.
 
-## The standard
+**HATEOAS**
 
-[^1]: [2023 State of the API Report](https://www.postman.com/state-of-api/api-technologies/#:~:text=While%20REST%20remains%20the%20most,and%2092%25%20the%20year%20prior.)
-[^2]: [How to understand "RESTful API is stateless"?](https://stackoverflow.com/questions/34130036/how-to-understand-restful-api-is-stateless)
-[^3:] [Caching your REST API](https://restcookbook.com/Basics/caching/)
+According to [Wikipedia](https://en.wikipedia.org/wiki/HATEOAS): *With HATEOAS, a client interacts with a network application whose application servers provide information dynamically through hypermedia. A REST client needs little to no prior knowledge about how to interact with an application or server beyond a generic understanding of hypermedia.*
+
+This is overengineering. No one in common commercial practice is building applications like that.
+- It is very difficult to implement. You can either do this manually (`<sarcasm>`because that's what we developers love, do manual stuff`</sarcasm>`) or your API must have a great reflective knowledge about the resources and their relations.
+- Clients are commonly hardwired to their APIs in practice because of UI/UX constraints.
+- Independent clients depending only on a *generic understanding of hypermedia* means you cannot have meaningful UI/UX
+
+**The REST convention is very old (2000)**
+
+And from the time where we didn't know much about how IT projects and APIs are going to evolve.
+
+## The standard!
+
+
+
+
+[^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
