@@ -105,6 +105,14 @@ Full stack developers are getting less and less common. IT teams are split betwe
 
 IT projects are driven by business requirements. Business requirements are ideas from people who pay us developers to realize these ideas into products. The standard in this text is described with this in mind.
 
+❗**Sane HTTP codes**
+
+REST utilizes the HTTP codes as they are defined in RFC but in practice the status codes are all over the place.
+
+❗**Validation models**
+
+REST does not say anything about how the interactions between clients and servers should look like when we consider validations of requests.
+
 # ✨ The POST only API standard ✨
 
 **Pretext about JSON casing**
@@ -129,6 +137,8 @@ When you build an API, you **SHOULDN'T** care if it's going to be consumed by a 
 ### 1.4. Accept the HTTP POST verb only
 1. Your endpoints should accept the HTTP request only with the HTTP POST verb.
 1. If the client sends a different HTTP verb then the HTTP response with status code 405 and **empty body** should be returned.
+
+Use POST even for data reading and use any JSON body model instead of URL parameters. Your life will be easier I promise. No complicated URL encoding and translations back and forth when everything you want is just a simple paginated and filterable table.
 
 ### 1.5. All communicated data (except files) belong to the POST body in the form of JSON
 1. The body of the HTTP request may be empty or contain a valid JSON
