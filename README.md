@@ -97,7 +97,7 @@ IT projects are driven by business requirements. Business requirements are ideas
 ## The standard itself! (finally)
 
 1. General philosophy
-1.1 **Client-server over browser-server.**
+1.1. Client-server over browser-server.
    HTTP is a historically estabilished stateless protocol for communication between browsers and servers but in time has evolved into a generalized client-server usage. When you build an API, you **SHOULDN'T** care if it's going to be consumed by a browser, a native application or some different API in a kubernetes cluster.
 
 1.1 **Ignore HTTP headers**
