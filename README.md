@@ -1,4 +1,4 @@
-# README
+# POST only API standard
 
 This is a for fun project aimed at creating a sensible API standard.
 
@@ -6,12 +6,12 @@ This is a for fun project aimed at creating a sensible API standard.
 
 🤨 **REST does not say anything about common topics related to API development.**
 
-As far as conventions go there's not much else in what REST APIs offer for a common API developer. REST implementations vary considerably in practice (in my opinion and experience) because the convention does not go very far in standardizing common needs of common API developers such as:
+As far as conventions go there's not much else in what REST APIs offer for a common API developer. REST implementations vary considerably in practice (in my opinion and experience) because the convention does not go very far in standardizing common needs of common API developers. 
 
-- validations
-- data filtering, paging, column sorting and column visibility
-- versioning
+Namely:
+
 - sane HTTP status code logic
+- failed validation models and erroneous behaviour
 
 🤨 **Caching**
 
@@ -230,6 +230,7 @@ Array of the input model values that are responsible for this validation to fail
   "attemptedValues": [555]
 }
 ```
+
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
