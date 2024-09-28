@@ -6,23 +6,22 @@ This is a for fun project aimed at creating a POST only API standard.
 
 ## Critique of the REST convention
 
-REST convention is a defacto today's standard for building APIs. [^1] It focuses on considering URL paths as *resources*, utilizing the URLs and HTTP verbs to either read (`GET`), create (`POST`), modify (`PUT`), partially modify (`PATCH`) or delete (`DELETE`) the data behind.
+**REST does not say anything about common topics related to API development.**
 
-### REST does not say anything about common topics related to API development
-
-However as far as conventions go there's not much else in what REST APIs offer for a common API developer. REST implementations vary considerably in practice (in my opinion and experience) because the convention does not go very far in standardizing common needs of common API developers such as:
+As far as conventions go there's not much else in what REST APIs offer for a common API developer. REST implementations vary considerably in practice (in my opinion and experience) because the convention does not go very far in standardizing common needs of common API developers such as:
 
 - validations
 - data filtering, paging, column sorting and column visibility
 - versioning
 - sane HTTP status code logic
 
-### REST has constraints that API developers mostly ignore
+**REST has constraints that API developers mostly ignore**.
+
 The standard also, as far as I can tell, imposes some other constraints on APIs that in practice most developers ignore.
 
 Namely:
 
-#### Caching
+### Caching
 
 Using HTTP header `Cache-Control` you can alter behavior on how browsers cache your `GET` responses.
 
@@ -33,7 +32,7 @@ This requirement is normally ignored because:
 - Caching is a hard problem. How to cache? When to cache? What to cache? For how long? Do we need to reset the cache reactively? Or on timed manner? How is the cache stored?
 - Utilizing `Cache-Control` can be just a single part of multilayered cache solution that utilizes the browser cache and/or the server cache.
 
-#### Hypermedia links
+### Hypermedia links
 
 Hypermedia links are references to URLs of other resources that are in some relation to the data you are returning.
 
