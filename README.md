@@ -97,9 +97,7 @@ IT projects are driven by business requirements. Business requirements are ideas
 
 # The POST only API standard
 
-## Pretext about JSON casing
-
-This convention defines JSON models which have properties written in `camelCase`. The casing is not important and you can use the model in any casing that suits you.
+**Pretext about JSON casing**: This convention defines JSON models which have properties written in `camelCase`. The casing is not important and you can use the model in any casing that suits you.
 
 ## 1. HTTP usage
 
@@ -169,10 +167,25 @@ Another argument is that modern applications implement validations on the fronte
 
 ```json
 {
-   "errorCode": "VALIDATION_ERROR",
-   "errorMessage": null,
-   "references": null,
-   "attemptedValues": null
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "errorCode": {
+      "type": "string"
+    },
+    "errorMessage": {
+      "type": ["string","null"]
+    },
+    "references": {
+      "type": ["array", "null"]
+    },
+    "attemptedValues": {
+      "type": ["array", "null"]
+    }
+  },
+  "required": [
+    "errorCode"
+  ]
 }
 ```
 
@@ -193,14 +206,16 @@ Error message is a human readable descriptive text which is by default in the de
 - The message should follow any logic you have in your system for localization.
 
 #### 3.1.3 References
-Array of the input model properties that are responsible for this validation to fail. If used together with `attemptedValues` then the references should line up with the values.
+Array of the input model properties that are responsible for this validation to fail. If used together with `attemptedValues` then the references should line up with the values. This array can be used by UI clients to visually mark fields or areas where the server validation failed.
 
-- It is not compulsory and is `null` by default.
+- It is not compulsory and can be omitted from response.
+- It can be `null`
 
 #### 3.1.3 Attempted values
-Array of the input model values that are responsible for this validation to fail. If used together with `references` then the attempted values should line up with the references.
+Array of the input model values that are responsible for this validation to fail. If used together with `references` then the attempted values should line up with the references. This array can be used by UI clients to display a human error message with the erroneous value that was provided.
 
-- It is not compulsory and is `null` by default.
+- It is not compulsory
+- It can be `null`
 
 
 [^1]: [Caching your REST API](https://restcookbook.com/Basics/caching/)
