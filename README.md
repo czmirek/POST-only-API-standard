@@ -199,7 +199,7 @@ Error code is a SCREAMING_SNAKE_CASE text.
 - It must not start with number and can contain only upper case alphanumerical english letters and underscore.
 - The error code must have at least 5 characters and is recommended to have at most 100 characters.
 - It should NOT contain any data.
-- Error codes should be hardcoded strings (or constants, enums, etc.) in the codebase of your API.
+- Error codes should be hardcoded strings (or constants, enums, etc.) in the codebase of your API. It shouldn't be possible to generate new error codes on runtime.
 - The default value is VALIDATION_ERROR. Error code must be ALWAYS present in the failed validation response.
 
 #### 3.1.2 Error message
